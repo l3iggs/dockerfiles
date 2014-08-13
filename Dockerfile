@@ -14,4 +14,5 @@ RUN pacman -Q
 
 RUN git clone https://github.com/pyke369/sffmpeg.git
 WORKDIR /sffmpeg
-CMD make
+CMD git pull && /
+make

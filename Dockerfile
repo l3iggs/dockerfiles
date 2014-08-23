@@ -16,4 +16,8 @@ RUN echo "[multilib]" >> /etc/pacman.conf
 RUN echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 RUN pacman -Suy --noconfirm
 
-RUN yaourt -Suya --noconfirm mingw-w64-ffmpeg && yaourt -Qtd 
+RUN yaourt -Suya --noconfirm --needed mingw-w64-ffmpeg && yaourt -Qtd 
+
+# disable multilib
+RUN head -n -2 /etc/pacman.conf
+RUN pacman -Suy --noconfirm

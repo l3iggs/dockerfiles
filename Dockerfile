@@ -21,3 +21,6 @@ RUN yaourt -Suya --noconfirm --needed mingw-w64-ffmpeg && yaourt -Qtd
 # disable multilib
 RUN head -n -2 /etc/pacman.conf
 RUN pacman -Suy --noconfirm
+
+# unset number of cores in makepkg
+RUN head -n -1 /etc/makepkg.conf

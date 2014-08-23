@@ -1,6 +1,10 @@
 FROM base/devel:latest
 MAINTAINER l3iggs <l3iggs@live.com>
 
+#update pacman
+RUN pacman -Suy --noconfirm
+
+# set number of build cores
 RUN echo MAKEFLAGS="-j`nproc`" >> /etc/makepkg.conf
 
 # fix for broken package in AUR
@@ -12,10 +16,12 @@ RUN makepkg -s --asroot --noconfirm
 RUN pacman -U --noconfirm mingw-w64-x264-*
 WORKDIR /
 
+# enable multilib
 RUN echo "[multilib]" >> /etc/pacman.conf
 RUN echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 RUN pacman -Suy --noconfirm
 
+#install ffmpeg then remove anything unneeded
 RUN yaourt -Suya --noconfirm --needed mingw-w64-ffmpeg && yaourt -Qtdy --noconfirm
 
 # disable multilib

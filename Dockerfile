@@ -22,11 +22,11 @@ RUN echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 RUN pacman -Suy --noconfirm
 
 #install ffmpeg then remove anything unneeded
-RUN yaourt -Suya --noconfirm --needed mingw-w64-ffmpeg && yaourt -Qtdy --noconfirm
+RUN yaourt -Suya --noconfirm --needed mingw-w64-ffmpeg && yaourt -Qtdy --noconfirm && pacman -Rsn --noconfirm $(pacman -Qdtq)
 
 # disable multilib
-RUN head -n -2 /etc/pacman.conf
+RUN head -n -2 /etc/pacman.conf > /etc/pacman.conf.new && mv /etc/pacman.conf.new /etc/pacman.conf
 RUN pacman -Suy --noconfirm
 
 # unset number of cores in makepkg
-RUN head -n -1 /etc/makepkg.conf
+RUN head -n -1 /etc/makepkg.conf > /etc/makepkg.conf.new && mv /etc/makepkg.conf.new /etc/makepkg.conf

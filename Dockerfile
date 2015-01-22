@@ -11,4 +11,5 @@ RUN pacman -Suy --noconfirm mercurial cmake unzip
 
 RUN git clone https://github.com/pyke369/sffmpeg.git
 WORKDIR /sffmpeg
-CMD git pull && make
+CMD git pull && \
+make

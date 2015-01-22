@@ -9,9 +9,6 @@ RUN git config --global user.name "l3iggs"
 # install mercurial cmake and unzip
 RUN pacman -Suy --noconfirm mercurial cmake unzip
 
-#list installed packages
-RUN pacman -Q
-
 RUN git clone https://github.com/pyke369/sffmpeg.git
 WORKDIR /sffmpeg
 CMD git pull && make
